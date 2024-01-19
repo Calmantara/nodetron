@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+  cache:
+    image: redis:alpine
+    ports:
+      - 16379:6379
+    networks:
+      - nodetron-net
+  db: 
+    build:
+      context: postgres
+      dockerfile: Dockerfile
+    command: ["postgres", "-c", "config_file=/etc/config/postgresql.conf"]
+    ports:
+      - 15432:5432
+    volumes:
+      - db-conf:/etc/config
+      - db-pg:/var/lib/postgresql
+  lb: 
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    ports:
+      - 9090:80
+    volumes:
+      - lb-conf:/etc/nginx:ro
+networks:
+  nodetron-net:
+    name: nodetron-net
+    driver: bridge
+
+volumes:
+  db-pg:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/dalton/postgres
+      o: bind
+  db-conf:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/dalton/postgres/config
+      o: bind
+  lb-conf:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/dalton/nginx/config
+      o: bind
