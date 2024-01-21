@@ -1,5 +1,10 @@
+# docker module
 dalton/nginx/config/**
 dalton/postgres/config/**
 
+# for debugging
 .DS_Store
 .vscode
+
+# node module
+node_module
