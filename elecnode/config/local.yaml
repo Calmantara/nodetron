@@ -1,0 +1,8 @@
+default:
+  server:
+    name: elecnode
+    port: 8080
+  postgres:
+    master:
+      host: 127.0.0.1
+      port: 15432

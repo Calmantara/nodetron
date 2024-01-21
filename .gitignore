@@ -1,2 +1,5 @@
 dalton/nginx/config/**
 dalton/postgres/config/**
+
+.DS_Store
+.vscode
