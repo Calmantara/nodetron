@@ -7,4 +7,4 @@ dalton/postgres/config/**
 .vscode
 
 # node module
-elecnode/node_modules
+elecnode/node_modules/**
